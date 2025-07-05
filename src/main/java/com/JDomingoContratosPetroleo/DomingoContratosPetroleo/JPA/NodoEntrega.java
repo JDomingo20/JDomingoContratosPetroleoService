@@ -8,12 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class NodoComercial {
+public class NodoEntrega {
     
     @Id
-    @Column(name = "idnodocomercial")
+    @Column(name = "idnodoentrega")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IdNodoComercial;
+    private int IdNodoEntrega;
     
     @Column(name = "clave")
     private String Clave;
@@ -21,12 +21,12 @@ public class NodoComercial {
     @Column(name = "descripcion")
     private String Descripcion;
 
-    public int getIdNodoComercial() {
-        return IdNodoComercial;
+    public int getIdNodoEntrega() {
+        return IdNodoEntrega;
     }
 
-    public void setIdNodoComercial(int IdNodoComercial) {
-        this.IdNodoComercial = IdNodoComercial;
+    public void setIdNodoEntrega(int IdNodoEntrega) {
+        this.IdNodoEntrega = IdNodoEntrega;
     }
 
     public String getClave() {

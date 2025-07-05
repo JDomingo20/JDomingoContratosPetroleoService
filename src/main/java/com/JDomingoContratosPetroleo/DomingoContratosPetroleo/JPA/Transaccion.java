@@ -32,7 +32,7 @@ public class Transaccion {
     
     @JoinColumn(name="idnodocomercial")
     @OneToMany
-    public List<NodoComercial> nodoComercial;
+    public List<NodoEntrega> nodoComercial;
     
     @JoinColumn(name = "zonainyeccion")
     @OneToMany
@@ -90,11 +90,11 @@ public class Transaccion {
         this.nodoRecepcion = nodoRecepcion;
     }
 
-    public List<NodoComercial> getNodoComercial() {
+    public List<NodoEntrega> getNodoComercial() {
         return nodoComercial;
     }
 
-    public void setNodoComercial(List<NodoComercial> nodoComercial) {
+    public void setNodoComercial(List<NodoEntrega> nodoComercial) {
         this.nodoComercial = nodoComercial;
     }
 
