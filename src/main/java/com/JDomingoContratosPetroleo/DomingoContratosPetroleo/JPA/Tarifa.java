@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.List;
@@ -18,16 +19,15 @@ public class Tarifa {
     @Column(name = "idtarifa")
     private int IdTarifa;
 
-    @Column(name = "tipo")
-    private String Tipo;
+    @Column(name = "excesofirme")
+    private double ExcesoFirme;
 
-    @JoinColumn(name = "iddetalletarifa")
-    @OneToOne
-    public DetalleTarifa detalleTarifa;
+    @Column(name = "usointerrumpible")
+    private double UsoInterrumpible;
 
     @JoinColumn(name = "idtransaccion")
-    @OneToMany
-    public List<Transaccion> transaccion;
+    @ManyToOne
+    public Transaccion transaccion;
 
     public int getIdTarifa() {
         return IdTarifa;
@@ -37,27 +37,27 @@ public class Tarifa {
         this.IdTarifa = IdTarifa;
     }
 
-    public String getTipo() {
-        return Tipo;
+    public double getExcesoFirme() {
+        return ExcesoFirme;
     }
 
-    public void setTipo(String Tipo) {
-        this.Tipo = Tipo;
+    public void setExcesoFirme(double ExcesoFirme) {
+        this.ExcesoFirme = ExcesoFirme;
     }
 
-    public DetalleTarifa getDetalleTarifa() {
-        return detalleTarifa;
+    public double getUsoInterrumpible() {
+        return UsoInterrumpible;
     }
 
-    public void setDetalleTarifa(DetalleTarifa detalleTarifa) {
-        this.detalleTarifa = detalleTarifa;
+    public void setUsoInterrumpible(double UsoInterrumpible) {
+        this.UsoInterrumpible = UsoInterrumpible;
     }
 
-    public List<Transaccion> getTransaccion() {
+    public Transaccion getTransaccion() {
         return transaccion;
     }
 
-    public void setTransaccion(List<Transaccion> transaccion) {
+    public void setTransaccion(Transaccion transaccion) {
         this.transaccion = transaccion;
     }
 

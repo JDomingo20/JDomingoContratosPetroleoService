@@ -7,23 +7,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class Contrato {
-    
+
     @Id
     @Column(name = "idcontrato")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IdContrato;
-    
+
     @Column(name = "clavecontrato")
     private String ClaveContrato;
-    
+
     @JoinColumn(name = "idusuario")
-    @OneToMany
-    public List<Usuario> usuario;
+    @ManyToOne
+    public Usuario usuario;
 
     public int getIdContrato() {
         return IdContrato;
@@ -41,12 +42,12 @@ public class Contrato {
         this.ClaveContrato = ClaveContrato;
     }
 
-    public List<Usuario> getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(List<Usuario> usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
 }

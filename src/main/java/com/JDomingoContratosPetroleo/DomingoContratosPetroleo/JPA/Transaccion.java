@@ -1,12 +1,14 @@
 
 package com.JDomingoContratosPetroleo.DomingoContratosPetroleo.JPA;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
@@ -23,24 +25,24 @@ public class Transaccion {
     private Date FechaRegistro;
     
     @JoinColumn(name = "idcontrato")
-    @OneToMany
-    public List<Contrato> contrato;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public Contrato contrato;
     
     @JoinColumn(name = "idnodorecepcion")
-    @OneToMany
-    public List<NodoRecepcion> nodoRecepcion;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public NodoRecepcion nodoRecepcion;
     
-    @JoinColumn(name="idnodocomercial")
-    @OneToMany
-    public List<NodoEntrega> nodoComercial;
+    @JoinColumn(name="idnodoentrega")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public NodoEntrega nodoEntrega;
     
     @JoinColumn(name = "zonainyeccion")
-    @OneToMany
-    public List<Zona> zonaInyeccion;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public Zona zonaInyeccion;
     
     @JoinColumn(name = "zonaextraccion")
-    @OneToMany
-    public List<Zona> zonaExraccion;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public Zona zonaExtraccion;
     
     @Column(name = "gasexceso")
     private double GasExceso;
@@ -54,9 +56,9 @@ public class Transaccion {
     @Column(name = "facturatotal")
     private double FacturaTotal;
     
-    @JoinColumn(name="cantidad")
-    @OneToMany
-    public List<Cantidad> cantidad;
+    @JoinColumn(name="idcantidad")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public Cantidad cantidad;
 
     public int getIdtransaccion() {
         return Idtransaccion;
@@ -74,44 +76,44 @@ public class Transaccion {
         this.FechaRegistro = FechaRegistro;
     }
 
-    public List<Contrato> getContrato() {
+    public Contrato getContrato() {
         return contrato;
     }
 
-    public void setContrato(List<Contrato> contrato) {
+    public void setContrato(Contrato contrato) {
         this.contrato = contrato;
     }
 
-    public List<NodoRecepcion> getNodoRecepcion() {
+    public NodoRecepcion getNodoRecepcion() {
         return nodoRecepcion;
     }
 
-    public void setNodoRecepcion(List<NodoRecepcion> nodoRecepcion) {
+    public void setNodoRecepcion(NodoRecepcion nodoRecepcion) {
         this.nodoRecepcion = nodoRecepcion;
     }
 
-    public List<NodoEntrega> getNodoComercial() {
-        return nodoComercial;
+    public NodoEntrega getNodoEntrega() {
+        return nodoEntrega;
     }
 
-    public void setNodoComercial(List<NodoEntrega> nodoComercial) {
-        this.nodoComercial = nodoComercial;
+    public void setNodoEntrega(NodoEntrega nodoEntrega) {
+        this.nodoEntrega = nodoEntrega;
     }
 
-    public List<Zona> getZonaInyeccion() {
+    public Zona getZonaInyeccion() {
         return zonaInyeccion;
     }
 
-    public void setZonaInyeccion(List<Zona> zonaInyeccion) {
+    public void setZonaInyeccion(Zona zonaInyeccion) {
         this.zonaInyeccion = zonaInyeccion;
     }
 
-    public List<Zona> getZonaExraccion() {
-        return zonaExraccion;
+    public Zona getZonaExtraccion() {
+        return zonaExtraccion;
     }
 
-    public void setZonaExraccion(List<Zona> zonaExraccion) {
-        this.zonaExraccion = zonaExraccion;
+    public void setZonaExtraccion(Zona zonaExtraccion) {
+        this.zonaExtraccion = zonaExtraccion;
     }
 
     public double getGasExceso() {
@@ -146,11 +148,11 @@ public class Transaccion {
         this.FacturaTotal = FacturaTotal;
     }
 
-    public List<Cantidad> getCantidad() {
+    public Cantidad getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(List<Cantidad> cantidad) {
+    public void setCantidad(Cantidad cantidad) {
         this.cantidad = cantidad;
     }
 }
