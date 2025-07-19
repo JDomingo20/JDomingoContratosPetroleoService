@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -37,16 +38,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "*")  // permite todas las solicitudes desde cualquier origen
 @RestController
-@RequestMapping("/CargaMasiva")
+@RequestMapping("/Inicio")
 public class PetroleoRestController {
 
     @Autowired
@@ -69,7 +75,7 @@ public class PetroleoRestController {
 
     @Autowired
     private TransaccionRepository transaccionRepository;
-    
+
     @Autowired
     private TarifaRepository tarifaRepository;
 
@@ -182,11 +188,11 @@ public class PetroleoRestController {
                     transaccion.setFacturaTotal(row.getCell(18).getNumericCellValue());
                     transaccion.setCantidad(cantidad);
                     listaTransacciones.add(transaccion);
-                    
+
                     //Tarifa
                     Tarifa tarifa = new Tarifa();
                     tarifa.transaccion = new Transaccion();
-                    
+
                     tarifa.setExcesoFirme(row.getCell(14).getNumericCellValue());
                     tarifa.setUsoInterrumpible(row.getCell(15).getNumericCellValue());
                     tarifa.setTransaccion(transaccion);
@@ -347,9 +353,9 @@ public class PetroleoRestController {
             if (resultadoLectura.getTransacciones() != null) {
                 transaccionRepository.saveAll(resultadoLectura.getTransacciones());
             }
-            
+
             //Guardar Tarifas
-            if(resultadoLectura.getTarifas() != null){
+            if (resultadoLectura.getTarifas() != null) {
                 tarifaRepository.saveAll(resultadoLectura.getTarifas());
             }
 
@@ -360,6 +366,55 @@ public class PetroleoRestController {
             result.correct = false;
             return ResponseEntity.internalServerError().body(result);
         }
+    }
+
+    @GetMapping("/GetAll")
+    public List<Tarifa> GetAll() {
+        System.out.println("");
+        return tarifaRepository.findAllByOrderByIdTarifa();
+    }
+
+    @GetMapping("/Contrato")
+    public List<Contrato> GetAllContrato() {
+        return contratoRepository.findAll();
+    }
+
+    @GetMapping("/Usuario")
+    public List<Usuario> GetAllUsuario() {
+        return usuarioRepository.findAll();
+    }
+
+    @GetMapping("/Zona")
+    public List<Zona> GetAllZona() {
+        return zonaRepository.findAll();
+    }
+
+    @GetMapping("/NodoRecepcion")
+    public List<NodoRecepcion> GetAllNodoR() {
+        return nodoRecepcionRepository.findAll();
+    }
+
+    @GetMapping("/NodoEntrega")
+    public List<NodoEntrega> GetAllNodoE() {
+        return nodoEntregaRepository.findAll();
+    }
+
+    @GetMapping("/UsuarioByContrato/{id}")
+    public ResponseEntity<Usuario> UsuarioByIdContrato(@PathVariable int id) {
+        Contrato contrato = contratoRepository.findByIdContrato(id);
+
+        if (contrato != null && contrato.getUsuario() != null) {
+            return ResponseEntity.ok(contrato.getUsuario());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/ContratoByUsuario/{id}")
+    public ResponseEntity<List<Contrato>> ContratoByIdUsuario(@PathVariable int id) {
+        Usuario usuario = usuarioRepository.findById(id).get();
+        List<Contrato> contratos = contratoRepository.findByUsuario(usuario);
+        return ResponseEntity.ok(contratos);
     }
 
 }

@@ -19,7 +19,7 @@ public class Transaccion {
     @Id
     @Column(name = "idtransaccion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Idtransaccion;
+    private int idTransaccion;
     
     @Column(name = "fecharegistro")
     private Date FechaRegistro;
@@ -60,14 +60,14 @@ public class Transaccion {
     @ManyToOne(cascade = CascadeType.PERSIST)
     public Cantidad cantidad;
 
-    public int getIdtransaccion() {
-        return Idtransaccion;
+    public int getIdTransaccion() {
+        return idTransaccion;
     }
 
-    public void setIdtransaccion(int Idtransaccion) {
-        this.Idtransaccion = Idtransaccion;
+    public void setIdTransaccion(int idTransaccion) {
+        this.idTransaccion = idTransaccion;
     }
-
+    
     public Date getFechaRegistro() {
         return FechaRegistro;
     }

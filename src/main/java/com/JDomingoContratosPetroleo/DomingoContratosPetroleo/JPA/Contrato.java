@@ -17,7 +17,7 @@ public class Contrato {
     @Id
     @Column(name = "idcontrato")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IdContrato;
+    private int idContrato;
 
     @Column(name = "clavecontrato")
     private String ClaveContrato;
@@ -27,11 +27,11 @@ public class Contrato {
     public Usuario usuario;
 
     public int getIdContrato() {
-        return IdContrato;
+        return idContrato;
     }
 
-    public void setIdContrato(int IdContrato) {
-        this.IdContrato = IdContrato;
+    public void setIdContrato(int idContrato) {
+        this.idContrato = idContrato;
     }
 
     public String getClaveContrato() {

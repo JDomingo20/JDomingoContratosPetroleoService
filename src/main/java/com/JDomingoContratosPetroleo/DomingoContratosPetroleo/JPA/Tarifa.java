@@ -17,7 +17,7 @@ public class Tarifa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idtarifa")
-    private int IdTarifa;
+    private int idTarifa;
 
     @Column(name = "excesofirme")
     private double ExcesoFirme;
@@ -30,11 +30,11 @@ public class Tarifa {
     public Transaccion transaccion;
 
     public int getIdTarifa() {
-        return IdTarifa;
+        return idTarifa;
     }
 
-    public void setIdTarifa(int IdTarifa) {
-        this.IdTarifa = IdTarifa;
+    public void setIdTarifa(int idTarifa) {
+        this.idTarifa = idTarifa;
     }
 
     public double getExcesoFirme() {

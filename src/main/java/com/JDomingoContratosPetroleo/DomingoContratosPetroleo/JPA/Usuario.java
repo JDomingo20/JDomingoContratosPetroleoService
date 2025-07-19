@@ -13,17 +13,17 @@ public class Usuario {
     @Id
     @Column(name="idusuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IdUsuario;
+    private int idUsuario;
     
     @Column(name = "nombre")
     private String Nombre;
 
     public int getIdUsuario() {
-        return IdUsuario;
+        return idUsuario;
     }
 
-    public void setIdUsuario(int IdUsuario) {
-        this.IdUsuario = IdUsuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
